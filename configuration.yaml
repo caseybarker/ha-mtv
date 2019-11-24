@@ -5,16 +5,18 @@ default_config:
 # http:
 #   base_url: example.duckdns.org:8123
 
-# Text to speech
-tts:
-  - platform: google_translate
-
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 
 homeassistant:
   customize: !include customize.yaml
+
+# Enable discovery
+discovery:
+# Text to speech
+tts:
+  - platform: google_translate
 
 recorder:
   exclude:
@@ -23,136 +25,6 @@ recorder:
       #- sensor.last_boot # Comes from 'systemmonitor' sensor platform
       - sensor.date
       - sensor.obihai_last_reboot
-
-somfy_mylink:
-  host: 192.168.110.28
-  system_id: !secret somfy_system_id
-
-camera:
-  - platform: uvc
-    nvr: unms.mtv.home.barkerzone.com
-    key: !secret unifi_camera_key
-    password: !secret unifi_camera_password
-
-insteon:
-  port: /dev/ttyUSB0
-  
-august:
-  login_method: phone
-  username: !secret august_username
-  password: !secret august_password
-
-# enable discovery by adding the following line
-discovery:
-
-konnected:
-  access_token: !secret konnected_access_token
-  api_host: http://192.168.109.3:8123
-  devices:
-    - id: dc4f225f3d36
-      discovery: false
-      host: 192.168.109.22
-      port: 14241
-      binary_sensors:
-        - zone: 1
-          type: door
-          name: 'Back-Entry'
-        - zone: 2
-          type: door
-          name: 'Back-Garage Service'
-        - zone: 3
-          type: window
-          name: 'Dining-Side L'
-        - zone: 4
-          type: window
-          name: 'Dining-Front'
-        - zone: 5
-          type: window
-          name: 'Dining-Side R'
-        - zone: 6
-          type: motion
-          name: 'Dining'
-      switches:
-        - zone: out
-          name: 'Siren'
-
-    - id: 6001940ac0b8
-      discovery: false
-      host: 192.168.109.23
-      port: 8704
-      binary_sensors:
-        - zone: 1
-          type: window
-          name: 'Guest-Front'
-        - zone: 2
-          type: window
-          name: 'Guest Bath'
-        - zone: 3
-          type: window
-          name: 'Guest-Side'
-        - zone: 4
-          type: window
-          name: 'Laundry'
-        - zone: 5
-          type: door
-          name: 'Guest-Balcony'
-        - zone: 6
-          type: motion
-          name: 'Hall'
-      switches:
-        - zone: out
-          name: 'Beeper'
-          momentary: 40
-          pause: 30
-          repeat: 2
-
-    - id: a4cf12c79826
-      discovery: false
-      host: 192.168.109.24
-      port: 21080
-      binary_sensors:
-        - zone: 1
-          type: door
-          name: 'Front-Entry'
-        - zone: 2
-          type: door
-          name: 'Garage-Kitchen'
-        - zone: 3
-          type: window
-          name: 'Family-Back L'
-        - zone: 4
-          type: window
-          name: 'Family-Back R'
-        - zone: 5
-          type: window
-          name: 'Family-Side L'
-        - zone: 6
-          type: window
-          name: 'Family-Side R'
-          
-    - id: 2cf432662a77
-      discovery: false
-      host: 192.168.109.25
-      port: 14695
-      binary_sensors:
-        - zone: 1
-          type: door
-          name: 'Den-Balcony'
-        - zone: 2
-          type: window
-          name: 'Master-Back L'
-        - zone: 3
-          type: window
-          name: 'Master-Front'
-        - zone: 4
-          type: window
-          name: 'Master-Back R'
-        - zone: 5
-          type: window
-          name: 'Master Bath'
-        - zone: 6
-          type: window
-          name: 'Master Bath-WC'
 
 alarm_control_panel:
   - platform: manual
@@ -166,6 +38,26 @@ alarm_control_panel:
     armed_home:
       pending_time: 0
       delay_time: 0
+
+insteon:
+  port: /dev/ttyUSB0
+
+konnected: !include konnected.yaml
+
+camera:
+  - platform: uvc
+    nvr: unms.mtv.home.barkerzone.com
+    key: !secret unifi_camera_key
+    password: !secret unifi_camera_password
+
+somfy_mylink:
+  host: 192.168.110.28
+  system_id: !secret somfy_system_id
+  
+august:
+  login_method: phone
+  username: !secret august_username
+  password: !secret august_password
 
 sensor:
   - platform: obihai
