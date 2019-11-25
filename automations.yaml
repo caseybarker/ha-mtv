@@ -1,41 +1,101 @@
-- id: '1568010065291'
-  alias: Exterior On at Sunset
+- id: 'balcony_on_sunset'
+  alias: Balcony On at Sunset
   trigger:
   - event: sunset
     platform: sun
   condition: []
   action:
-  - data:
+  # Turn on scene for simultaneous response
+  - service: insteon.scene_on
+    data:
       group: 1
-    service: insteon.scene_on
-  - data:
-      group: 2
-    service: insteon.scene_on
-  - data:
+  # Turn on light group to sync light states in HA
+  - service: light.turn_on
+    data:
       entity_id: 
-        - light.switchlinc_dimmer_4d_97_d9
-    service: light.turn_on
-- id: '1568103741415'
-  alias: Exterior Off at Night
+        - light.balcony_lights
+
+- id: 'balcony_off_night'
+  alias: Balcony Off at Night
   trigger:
   - at: '22:30'
     platform: time
   condition: []
   action:
-  - data:
+  # Turn off scene for simultaneous response
+  - service: insteon.scene_off
+    data:
       group: 1
-    service: insteon.scene_off
-  - data:
+  # Turn off light group to sync light states in HA
+  - service: light.turn_off
+    data:
+      entity_id: 
+        - light.balcony_lights
+
+- id: 'back_yard_on_sunset'
+  alias: Back Yard On at Sunset
+  trigger:
+  - event: sunset
+    platform: sun
+  condition: []
+  action:
+  # Turn on scene for simultaneous response
+  - service: insteon.scene_on
+    data:
       group: 2
-    service: insteon.scene_off
-- id: '1568103741416'
+  # Turn on light group to sync light states in HA
+  - service: light.turn_on
+    data:
+      entity_id: 
+        - light.back_yard_lights
+  # Ground lights are a switch
+  - service: switch.turn_on
+    data:
+      entity_id:
+        - switch.on_off_outdoor_module_47_b7_78
+
+- id: 'back_yard_off_night'
+  alias: Back Yard Off at Night
+  trigger:
+  - at: '22:30'
+    platform: time
+  condition: []
+  action:
+  # Turn off scene for simultaneous response
+  - service: insteon.scene_off
+    data:
+      group: 2
+  # Turn off light group to sync light states in HA
+  - service: light.turn_off
+    data:
+      entity_id: 
+        - light.back_yard_lights
+  # Ground lights are a switch
+  - service: switch.turn_off
+    data:
+      entity_id:
+        - switch.on_off_outdoor_module_47_b7_78
+
+- id: 'front_porch_on_sunset'
+  alias: Front Porch On at Sunset
+  trigger:
+  - event: sunset
+    platform: sun
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      entity_id:
+      - light.switchlinc_dimmer_4d_97_d9
+
+- id: 'front_porch_off_sunrise'
   alias: Front Porch Off at Sunrise
   trigger:
   - event: sunrise
     platform: sun
   condition: []
   action:
-  - data:
+  - service: light.turn_off
+    data:
       entity_id:
       - light.switchlinc_dimmer_4d_97_d9
-    service: light.turn_off

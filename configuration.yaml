@@ -29,7 +29,7 @@ recorder:
 alarm_control_panel:
   - platform: manual
     name: Home Alarm
-    code: 1234
+    code: !secret alarm_code
     pending_time: 30
     delay_time: 20
     trigger_time: 4
@@ -64,3 +64,16 @@ sensor:
     host: obi.mtv.home.barkerzone.com
     username: admin
     password: !secret obihai_password
+
+light:
+  - platform: group
+    name: "Balcony Lights"
+    entities:
+      - light.switchlinc_dimmer_4d_9b_19
+      - light.switchlinc_dimmer_4d_a8_8f
+
+  - platform: group
+    name: "Back Yard Lights"
+    entities:
+      - light.switchlinc_dimmer_4d_a2_0d
+      - light.switchlinc_dimmer_4d_97_e9
