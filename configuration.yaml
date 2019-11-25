@@ -65,6 +65,11 @@ sensor:
     username: admin
     password: !secret obihai_password
 
+  - platform: command_line
+    name: cpu_temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp | awk '{print ((($1*.001) * 9 / 5))+32}'"
+    unit_of_measurement: "°F"
+
 rachio:
   api_key: !secret rachio_api_key
 
