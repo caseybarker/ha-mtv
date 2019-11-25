@@ -2,15 +2,15 @@
 default_config:
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
+http:
+  base_url: "hassio.mtv.home.barkerzone.com:8123"
+
+homeassistant:
+  customize: !include customize.yaml
 
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
-
-homeassistant:
-  customize: !include customize.yaml
 
 # Enable discovery
 discovery:

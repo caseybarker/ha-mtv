@@ -1,2 +1,16 @@
 switch.on_off_outdoor_module_47_b7_78:
   friendly_name: Back Yard Ground Lights
+switch.switchlinc_relay_dual_band_50_c0_84:
+  friendly_name: Family Room Lamps
+switch.switchlinc_relay_dual_band_50_c0_82:
+  friendly_name: Guest Floor Lamp
+light.switchlinc_dimmer_4d_97_d9:
+  friendly_name: Front Porch Sconce
+light.switchlinc_dimmer_4d_a2_0d:
+  friendly_name: Back Yard Sconce
+light.switchlinc_dimmer_4d_97_e9:
+  friendly_name: Garage Service Sconce
+light.switchlinc_dimmer_4d_a8_8f:
+  friendly_name: "[N/C] (Den)"
+light.switchlinc_dimmer_4d_9b_19:
+  friendly_name: "Front Balcony Recessed (Guest)"
