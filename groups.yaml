@@ -1,0 +1,12 @@
+balcony_lights:
+  name: Balcony
+  entities:
+    - light.switchlinc_dimmer_4d_9b_19
+    - light.switchlinc_dimmer_4d_a8_8f
+
+back_yard_lights:
+  name: "Back Yard"
+  entities:
+    - light.switchlinc_dimmer_4d_a2_0d
+    - light.switchlinc_dimmer_4d_97_e9
+    - switch.on_off_outdoor_module_47_b7_78

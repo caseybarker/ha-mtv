@@ -11,9 +11,9 @@
   - data:
       group: 2
     service: insteon.scene_on
-  - alias: ''
-    data:
-      entity_id: light.switchlinc_dimmer_4d_97_d9
+  - data:
+      entity_id: 
+        - light.switchlinc_dimmer_4d_97_d9
     service: light.turn_on
 - id: '1568103741415'
   alias: Exterior Off at Night
