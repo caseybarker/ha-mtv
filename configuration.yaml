@@ -65,6 +65,9 @@ sensor:
     username: admin
     password: !secret obihai_password
 
+rachio:
+  api_key: !secret rachio_api_key
+
 light:
   - platform: group
     name: "Balcony Lights"
