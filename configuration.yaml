@@ -72,16 +72,3 @@ sensor:
 
 rachio:
   api_key: !secret rachio_api_key
-
-light:
-  - platform: group
-    name: "Balcony Lights"
-    entities:
-      - light.switchlinc_dimmer_4d_9b_19
-      - light.switchlinc_dimmer_4d_a8_8f
-
-  - platform: group
-    name: "Back Yard Lights"
-    entities:
-      - light.switchlinc_dimmer_4d_a2_0d
-      - light.switchlinc_dimmer_4d_97_e9
