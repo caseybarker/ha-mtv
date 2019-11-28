@@ -1,0 +1,35 @@
+all_windows:
+  name: Window Sensors
+  entities:
+    - binary_sensor.window_dining_front
+    - binary_sensor.window_dining_side_l
+    - binary_sensor.window_dining_side_r
+    - binary_sensor.window_family_side_l
+    - binary_sensor.window_family_side_r
+    - binary_sensor.window_family_back_l
+    - binary_sensor.window_family_back_r
+    - binary_sensor.window_guest_front
+    - binary_sensor.window_guest_side
+    - binary_sensor.window_guest_bath
+    - binary_sensor.window_laundry
+    - binary_sensor.window_master_front
+    - binary_sensor.window_master_back_l
+    - binary_sensor.window_master_back_r
+    - binary_sensor.window_master_bath
+    - binary_sensor.window_master_bath_wc
+
+all_doors:
+  name: Door Sensors
+  entities:
+    - binary_sensor.door_front_entry
+    - binary_sensor.door_guest_balcony
+    - binary_sensor.door_den_balcony
+    - binary_sensor.door_garage_kitchen
+    - binary_sensor.door_back_entry
+    - binary_sensor.door_back_garage_service
+
+all_motions:
+  name: Motion Sensors
+  entities:
+    - binary_sensor.motion_dining
+    - binary_sensor.motion_hall

@@ -99,6 +99,77 @@
       entity_id:
       - light.front_porch_sconce
 
+########
+# Alarm
+########
+- id: 'alarm_trigger_home'
+  alias: 'Trigger alarm while armed home'
+  trigger:
+  - platform: state
+    entity_id: group.all_doors
+    to: 'on'
+  - platform: state
+    entity_id: group.all_windows
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: armed_home
+  action:
+  - service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.ha_alarm
+
+- id: 'alarm_trigger_away'
+  alias: 'Trigger alarm while armed away'
+  trigger:
+  - platform: state
+    entity_id: group.all_doors
+    to: 'on'
+  - platform: state
+    entity_id: group.all_windows
+    to: 'on'
+  - platform: state
+    entity_id: group.all_motions
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: armed_away
+  action:
+  - service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.ha_alarm
+
+- id: 'alarm_disarm_august'
+  alias: 'Disarm alarm away when front door unlocked by user'
+  trigger:
+  - platform: state
+    entity_id: lock.front_door
+    to: "unlocked"
+  condition:
+  - condition: template
+    value_template: "{{ not is_state_attr('lock.front_door', 'changed_by', 'Manual')}}"
+  - condition: template
+    value_template: "{{ not is_state('alarm_control_panel.ha_alarm', 'disarmed')}}"
+  action:
+  - service: alarm_control_panel.alarm_disarm
+    data:
+      entity_id: alarm_control_panel.ha_alarm
+      code: !secret alarm_code
+  - service: notify.barker_sfbay
+    data_template:
+      message: "Alarm disarmed, front door {{ states('lock.front_door') }} by {{ state_attr('lock.front_door', 'changed_by') }}"
+
+- id: 'alarm_trigger'
+  alias: 'Alarm trigger'
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.ha_alarm
+    to: 'triggered'
+  action:
+  - service: notify.barker_sfbay
+    data_template:
+      message: "ALARM"
+
 #######
 # Misc
 #######
@@ -113,4 +184,4 @@
   - condition: template
     value_template: '{{ not is_state("sensor.external_ip", "unavailable") }}'
   action:
-    - service: hangouts.reconnect
+  - service: hangouts.reconnect

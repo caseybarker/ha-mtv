@@ -28,16 +28,7 @@ recorder:
 
 alarm_control_panel:
   - platform: manual
-    name: Home Alarm
     code: !secret alarm_code
-    delay_time: 60
-    pending_time: 60
-    trigger_time: 4
-    disarmed:
-      trigger_time: 0
-    armed_away:
-      pending_time: 60
-      delay_time: 60
     armed_home:
       pending_time: 0
       delay_time: 0
@@ -73,6 +64,9 @@ sensor:
     command: "cat /sys/class/thermal/thermal_zone0/temp | awk '{print ((($1*.001) * 9 / 5))+32}'"
     unit_of_measurement: "°F"
 
+# Detect external changes to IP for reconnecting hangouts:
+  - platform: dnsip
+
 rachio:
   api_key: !secret rachio_api_key
 
@@ -83,6 +77,3 @@ notify:
       # Casey
       - id: UgxSr8D2vJXP2pELjql4AaABAagBt52KAw
 
-# Detect external changes to IP for reconnecting hangouts:
-sensor:
-  - platform: dnsip
